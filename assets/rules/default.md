@@ -1,46 +1,53 @@
 ---
-# 项目内置默认规则（Phase 1 安全版）
+# Quy tắc mặc định nội dự án (Phiên bản an toàn Phase 1)
 #
-# 这里只放"机械可检 + 低争议"的默认约束。非机械化审美偏好（如风格倾向）
-# 当前仍由 writer.md / editor.md 承载，待 Phase 1.5（F1 手测验证
-# working_memory 约束力后）再决定是否搬入本文件。
+# Đây chỉ đặt ràng buộc mặc định "cơ khí可 kiểm + ít tranh cãi". Ưu tiên thẩm mỹ
+# phi cơ khí (như khuynh hướng phong cách) hiện vẫn do writer.md / editor.md
+# gánh, chờ Phase 1.5 (sau khi F1 tay test xác nhận sức ràng buộc
+# working_memory) mới quyết định có chuyển vào file này.
 #
-# 用户可在 ./.ainovel/rules/ 或 ~/.ainovel/rules/ 目录（其下任意 .md）覆盖普通字段；
-# fatigue_words 按词合并，同一词由更近来源覆盖阈值。
-# 详细字段语义参见项目根 rules.md.example。
+# Người dùng có thể trong ./.ainovel/rules/ hoặc ~/.ainovel/rules/ (bất kỳ .md
+# dưới thư mục) ghi đè trường thường; fatigue_words gộp theo từ, cùng một từ
+# do nguồn gần hơn ghi đè ngưỡng.
+# Xem ngữ nghĩa trường chi tiết tại rules.md.example gốc dự án.
 
-# 章节字数范围：偏差 <20% 警告；≥20% 错误。
+# Khoảng số chữ chương: lệch <20% cảnh báo; ≥20% lỗi.
 chapter_words: 3000-6000
 
-# 短语黑名单：出现 ≥1 次即 error。checker 做字面子串匹配，无通配符，
-# 故只放"定长固定串"的 AI 套句（低争议）；带变量的模式（如"不是X而是Y"）
-# 字面匹配抓不到，归 anti-ai-tone.md 语义层。
-# 破折号 "——" 在对话被打断时合法，有争议，不进内置默认，留给 ./.ainovel/rules/ 自配。
+# Danh sách đen cụm từ: xuất hiện ≥1 lần即 lỗi. Checker làm khớp con字面,
+# không có ký tự đại diện, nên chỉ đặt "cụm cố định định dài" câu cụ AI
+# (ít tranh cãi); mẫu含 biến số (như "không phải X mà là Y")
+# 字面 khớp không bắt được, về anti-ai-tone.md tầng ngữ nghĩa.
+# Gạch ngang "—" trong đối thoại bị ngắt là hợp pháp, có tranh cãi,
+# không vào mặc định nội bộ,留给 ./.ainovel/rules/ tự cấu hình.
 forbidden_phrases:
-  - "某种程度上"
-  - "值得注意的是"
-  - "不知为何"
-  - "五味杂陈"
+  - "một cách nào đó"
+  - "đáng chú ý là"
+  - "không hiểu vì sao"
+  - "ngũ vị tạp trần"
 
-# 疲劳词软限制：commit_chapter 会检查每章出现次数，超过阈值报 warning。
-# 这些是网文/小说常见过度使用的词，anti-ai-tone.md 有同方向的语义提示——双源信号一致。
-# 后六条（像一/沉默了/没有说话/X息）来自 196 章长跑产物实证：传统套话已被上面的
-# 表灭绝，但模型转而把这些"节拍词"用到章均 5-7 次；阈值放宽容忍正常使用。
+# Giới hạn mềm từ mỏi: commit_chapter sẽ kiểm tra số lần xuất hiện mỗi chương,
+# vượt ngưỡng báo warning.
+# Đây là từ过度 sử dụng thường见 trong webnovel/tiểu thuyết, anti-ai-tone.md
+# có hướng ngữ nghĩa đồng hướng——tín hiệu hai nguồn nhất quán.
+# Sáu条 sau (như một/âm默了/không nói/X hơi) từ thực chứng 196 chương chạy dài:
+# câu cụ truyền thống đã bị表 phía trên diệt, nhưng mô hình chuyển sang dùng
+# các "từ nhịp" này平均 chương 5-7 lần; ngưỡng đặt rộng dung thứ sử dụng bình thường.
 fatigue_words:
-  不禁: 1
-  竟然: 1
-  仿佛: 2
-  此外: 1
-  然而: 2
-  一丝: 2
-  一抹: 2
-  一缕: 2
-  宛如: 1
-  不由得: 1
-  像一: 3
-  沉默了: 2
-  没有说话: 2
-  几息: 3
-  一息: 3
-  数息: 2
+  không_khỏi: 1
+  đột_nhiên: 1
+  như_thể: 2
+  ngoài_ra: 1
+  tuy_nhiên: 2
+  một_chút: 2
+  một_nét: 2
+  một_luồng: 2
+  tựa_như: 1
+  không_khỏi_phải: 1
+  giống_như_một: 3
+  im_lặng: 2
+  không_nói_gì: 2
+  mấy_hơi: 3
+  một_hơi: 3
+  vài_hơi: 2
 ---
