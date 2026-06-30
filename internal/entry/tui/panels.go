@@ -19,7 +19,7 @@ import (
 func renderTopBar(snap host.UISnapshot, width int, spinnerFrame, version string) string {
 	novelName := snap.NovelName
 	if novelName == "" {
-		novelName = "未定书名"
+		novelName = "Chưa đặt tên sách"
 	}
 
 	var infoParts []string
@@ -1079,7 +1079,7 @@ func renderEventFlowViewport(vp viewport.Model, width, height int, focused bool)
 	if focused {
 		titleColor = colorAccent
 	}
-	title := lipgloss.NewStyle().Foreground(titleColor).Render(":: 事件流")
+	title := lipgloss.NewStyle().Foreground(titleColor).Render(":: Luồng sự kiện")
 	lineW := width - lipgloss.Width(title) - 4
 	if lineW < 0 {
 		lineW = 0
@@ -1104,7 +1104,7 @@ func renderStreamPanel(vp viewport.Model, width, height int, focused, running bo
 	// 分隔标题栏（始终醒目）：粗竖条前缀 + 永远 Bold + 强调色，避免与思考的淡灰斜体撞色
 	// focused 时额外下划线，区分焦点态。
 	titleStyle := lipgloss.NewStyle().Foreground(colorAccent).Bold(true).Underline(focused)
-	title := titleStyle.Render("▍实时输出")
+	title := titleStyle.Render("▍Output thời gian thực")
 	if running {
 		status := renderStreamActivity(frame)
 		title += " " + status
@@ -1653,10 +1653,10 @@ func renderWelcome(width, height int, errMsg string, mode startupMode) string {
 
 	// 功能亮点
 	features := []struct{ icon, label, desc string }{
-		{">>", "多模型协作", "Architect 规划 / Writer 创作 / Editor 审阅"},
-		{"::", "断点恢复", "崩溃或中断后从上次进度自动续写"},
-		{"<>", "实时干预", "创作过程中随时调整剧情走向"},
-		{"##", "分层长篇", "支持卷-弧-章分层结构的长篇创作"},
+		{">>", "Phối hợp nhiều model", "Architect lập kế hoạch / Writer sáng tác / Editor duyệt"},
+		{"::", "Khôi phục từ checkpoint", "Tự viết tiếp từ tiến độ trước sau khi crash hoặc gián đoạn"},
+		{"<>", "Can thiệp thời gian thực", "Điều chỉnh hướng cốt truyện bất cứ lúc nào khi đang viết"},
+		{"##", "Truyện dài phân tầng", "Hỗ trợ cấu trúc Quyển - Arc - Chương cho truyện dài"},
 	}
 	iconStyle := lipgloss.NewStyle().Foreground(colorAccent2).Bold(true)
 	featLabelStyle := lipgloss.NewStyle().Foreground(bodyTextColor)
@@ -1671,17 +1671,17 @@ func renderWelcome(width, height int, errMsg string, mode startupMode) string {
 	feats := strings.Join(featLines, "\n")
 
 	// 输入提示
-	prompt := lipgloss.NewStyle().Foreground(bodyTextColor).Render("在下方输入你的小说需求开始创作")
+	prompt := lipgloss.NewStyle().Foreground(bodyTextColor).Render("Nhập yêu cầu tiểu thuyết bên dưới để bắt đầu sáng tác")
 
 	modeLine := lipgloss.NewStyle().
 		Foreground(colorMuted).
-		Render("当前模式：" + mode.label() + " · " + mode.subtitle())
+		Render("Chế độ hiện tại: " + mode.label() + " · " + mode.subtitle())
 
 	// 示例
 	examples := []string{
-		"写一部 12 章都市悬疑小说，主角是一名女法医",
-		"创作一部仙侠长篇，主角从凡人修炼至飞升",
-		"写一个科幻短篇，讲述 AI 觉醒后的伦理困境",
+		"Viết truyện huyền nghi đô thị 12 chương, nhân vật chính là một nữ pháp y",
+		"Sáng tác một truyện tiên hiệp dài, nhân vật chính tu luyện từ phàm nhân đến phi thăng",
+		"Viết truyện ngắn khoa học viễn tưởng về khủng hoảng đạo đức sau khi AI thức tỉnh",
 	}
 	exStyle := lipgloss.NewStyle().Foreground(colorAccent)
 	dotStyle := lipgloss.NewStyle().Foreground(colorDim)

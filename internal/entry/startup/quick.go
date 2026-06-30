@@ -15,7 +15,7 @@ func PrepareQuick(req Request) (Plan, error) {
 	}
 	return Plan{
 		Mode:        ModeQuick,
-		DisplayName: "快速开始",
+		DisplayName: "Bắt đầu nhanh",
 		StartPrompt: host.BuildStartPrompt(prompt),
 	}, nil
 }

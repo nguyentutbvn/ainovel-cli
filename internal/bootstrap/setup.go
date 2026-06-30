@@ -62,7 +62,7 @@ var setupProviders = []setupProvider{
 func RunSetup() (Config, error) {
 	fmt.Fprintln(os.Stderr)
 	fmt.Fprintln(os.Stderr, lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("99")).
-		Render("未检测到配置文件，开始初始化设置..."))
+		Render("Không phát hiện file cấu hình, bắt đầu thiết lập..."))
 	fmt.Fprintf(os.Stderr, "  配置文件路径：%s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("245")).Render(DefaultConfigPath()))
 	fmt.Fprintf(os.Stderr, "  完成后可随时编辑该文件调整高级设置。\n")
 	fmt.Fprintln(os.Stderr)
@@ -79,7 +79,7 @@ func RunSetup() (Config, error) {
 
 	// 自定义代理：额外问名称和 API 协议类型
 	if sp.needType {
-		providerName, err = runTextInput("Provider 名称", "my-proxy")
+		providerName, err = runTextInput("Tên Provider", "my-proxy")
 		if err != nil {
 			return Config{}, err
 		}
@@ -93,7 +93,7 @@ func RunSetup() (Config, error) {
 	// Step 2: 输入 API Key
 	var apiKey string
 	if sp.apiKeyOptional {
-		apiKey, err = runOptionalTextInput("[2/4] API Key（可留空）", "留空表示不使用 API Key")
+		apiKey, err = runOptionalTextInput("[2/4] API Key (có thể để trống)", "Để trống nghĩa là không dùng API Key")
 	} else {
 		apiKey, err = runTextInput("[2/4] API Key", "sk-xxx")
 	}
@@ -109,11 +109,11 @@ func RunSetup() (Config, error) {
 
 	// Step 3: Base URL（直接回车使用官方默认地址）
 	baseDefault := sp.baseURL
-	baseHint := "留空使用官方地址"
+	baseHint := "Để trống để dùng địa chỉ chính thức"
 	if baseDefault != "" {
 		baseHint = baseDefault
 	}
-	baseURL, err := runTextInputWithDefault("[3/4] Base URL（直接回车使用默认，代理用户填写代理地址）", baseHint, baseDefault)
+	baseURL, err := runTextInputWithDefault("[3/4] Base URL (Enter để dùng mặc định; nếu dùng proxy hãy nhập địa chỉ proxy)", baseHint, baseDefault)
 	if err != nil {
 		return Config{}, err
 	}
@@ -125,7 +125,7 @@ func RunSetup() (Config, error) {
 	}
 
 	// Step 4: 模型名（必填）
-	modelName, err := runTextInput("[4/4] 模型名称", "例如：gpt-4o / claude-sonnet-4 / gemini-2.5-pro")
+	modelName, err := runTextInput("[4/4] Tên model", "Ví dụ: gpt-4o / claude-sonnet-4 / gemini-2.5-pro")
 	if err != nil {
 		return Config{}, err
 	}
@@ -191,7 +191,7 @@ func maskKey(key string) string {
 
 func runProviderSelect() (setupProvider, error) {
 	m := setupSelectModel{
-		title: "[1/4] 选择 Provider",
+		title: "[1/4] Chọn Provider",
 		items: setupProviders,
 	}
 	p := tea.NewProgram(m, tea.WithOutput(os.Stderr))
@@ -207,14 +207,14 @@ func runProviderSelect() (setupProvider, error) {
 }
 
 var apiTypeOptions = []setupProvider{
-	{name: "openai", label: "OpenAI 兼容"},
-	{name: "anthropic", label: "Anthropic 兼容"},
-	{name: "gemini", label: "Gemini 兼容"},
+	{name: "openai", label: "Tương thích OpenAI"},
+	{name: "anthropic", label: "Tương thích Anthropic"},
+	{name: "gemini", label: "Tương thích Gemini"},
 }
 
 func runTypeSelect() (string, error) {
 	m := setupSelectModel{
-		title: "API 协议类型",
+		title: "Loại giao thức API",
 		items: apiTypeOptions,
 	}
 	p := tea.NewProgram(m, tea.WithOutput(os.Stderr))

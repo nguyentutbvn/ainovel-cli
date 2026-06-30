@@ -20,27 +20,27 @@ const (
 func (m startupMode) label() string {
 	switch m {
 	case startupModeCoCreate:
-		return "共创规划"
+		return "Cùng lập kế hoạch"
 	default:
-		return "快速开始"
+		return "Bắt đầu nhanh"
 	}
 }
 
 func (m startupMode) subtitle() string {
 	switch m {
 	case startupModeCoCreate:
-		return "先与 AI 对话澄清，再开始创作"
+		return "Trao đổi với AI để làm rõ trước khi bắt đầu viết"
 	default:
-		return "一句话直接开始写"
+		return "Bắt đầu viết ngay từ một câu yêu cầu"
 	}
 }
 
 func placeholderForNewMode(mode startupMode) string {
 	switch mode {
 	case startupModeCoCreate:
-		return "先输入你的核心想法，Enter 开始与 AI 共创"
+		return "Nhập ý tưởng cốt lõi, Enter để cùng AI lập kế hoạch"
 	default:
-		return "输入一句小说需求，Enter 直接开始创作"
+		return "Nhập một yêu cầu tiểu thuyết, Enter để bắt đầu viết ngay"
 	}
 }
 
@@ -50,7 +50,7 @@ func placeholderForCoCreate(state *cocreateState) string {
 	}
 	switch {
 	case state.awaiting:
-		return "AI 正在整理你的要求..."
+		return "AI đang tổng hợp yêu cầu của bạn..."
 	case state.canStart():
 		if state.stage {
 			return "继续补充，或按 Ctrl+S 应用方向并继续创作"
@@ -159,12 +159,12 @@ func (s *cocreateState) buildPlan() (startup.Plan, error) {
 }
 
 func renderStartupModeBar(width int, mode startupMode) string {
-	quick := renderStartupModePill(mode == startupModeQuick, "快速开始")
-	cocreate := renderStartupModePill(mode == startupModeCoCreate, "共创规划")
+	quick := renderStartupModePill(mode == startupModeQuick, "Bắt đầu nhanh")
+	cocreate := renderStartupModePill(mode == startupModeCoCreate, "Cùng lập kế hoạch")
 	title := lipgloss.NewStyle().
 		Foreground(colorAccent).
 		Bold(true).
-		Render("启动模式")
+		Render("Chế độ khởi động")
 	divider := lipgloss.NewStyle().
 		Foreground(colorDim).
 		Render("·")
@@ -354,9 +354,9 @@ func renderCoCreateModal(width, height int, state *cocreateState, errMsg, inputV
 		contentH = 10
 	}
 
-	titleText, subtitleText := "共创规划", "先把需求聊清楚，再开始创作"
+	titleText, subtitleText := "Cùng lập kế hoạch", "Làm rõ yêu cầu trước, rồi bắt đầu viết"
 	if state.stage {
-		titleText, subtitleText = "阶段共创", "规划后续走向，再继续创作"
+		titleText, subtitleText = "Lập kế hoạch giai đoạn", "Lập kế hoạch hướng tiếp theo, rồi viết tiếp"
 	}
 	headerStyle := lipgloss.NewStyle().Width(boxW).AlignHorizontal(lipgloss.Center)
 	title := headerStyle.Foreground(colorMuted).Bold(true).Render(titleText)

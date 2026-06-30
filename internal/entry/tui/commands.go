@@ -55,7 +55,7 @@ func commandRegistryInstance() commandRegistry {
 			Name:        "help",
 			Group:       "system",
 			Usage:       "/help",
-			Description: "查看命令列表",
+			Description: "Xem danh sách lệnh",
 			AutoExecute: true,
 			Run: func(m Model, _ []string) (tea.Model, tea.Cmd) {
 				m.help = newHelpState(m.width, m.height)
@@ -67,7 +67,7 @@ func commandRegistryInstance() commandRegistry {
 			Name:        "model",
 			Group:       "system",
 			Usage:       "/model [role]",
-			Description: "切换默认或角色模型",
+			Description: "Đổi model mặc định hoặc theo vai trò",
 			AutoExecute: true,
 			Run: func(m Model, args []string) (tea.Model, tea.Cmd) {
 				roleHint := ""
@@ -90,7 +90,7 @@ func commandRegistryInstance() commandRegistry {
 			Name:        "diag",
 			Group:       "analysis",
 			Usage:       "/diag",
-			Description: "诊断小说创作健康度",
+			Description: "Chẩn đoán sức khỏe quá trình sáng tác",
 			AutoExecute: true,
 			Run: func(m Model, _ []string) (tea.Model, tea.Cmd) {
 				m.reportSeq++
@@ -103,7 +103,7 @@ func commandRegistryInstance() commandRegistry {
 			Name:        "import",
 			Group:       "writing",
 			Usage:       "/import <path> [from=N]",
-			Description: "反推外部小说续写",
+			Description: "Phân tích ngược tiểu thuyết ngoài để viết tiếp",
 			NeedsIdle:   true,
 			Run: func(m Model, args []string) (tea.Model, tea.Cmd) {
 				m.importSeq++
@@ -125,7 +125,7 @@ func commandRegistryInstance() commandRegistry {
 			Aliases:     []string{"plan"},
 			Group:       "writing",
 			Usage:       "/cocreate",
-			Description: "暂停创作，共创规划后续阶段走向",
+			Description: "Tạm dừng sáng tác để cùng lập kế hoạch giai đoạn tiếp theo",
 			AutoExecute: true,
 			Run: func(m Model, _ []string) (tea.Model, tea.Cmd) {
 				if m.mode != modeRunning {
@@ -152,7 +152,7 @@ func commandRegistryInstance() commandRegistry {
 			Name:        "simulate",
 			Group:       "writing",
 			Usage:       "/simulate",
-			Description: "读取 ./simulate 生成或增量更新仿写画像",
+			Description: "Đọc ./simulate để tạo hoặc cập nhật hồ sơ mô phỏng văn phong",
 			NeedsIdle:   true,
 			Run: func(m Model, args []string) (tea.Model, tea.Cmd) {
 				m.simSeq++
@@ -173,7 +173,7 @@ func commandRegistryInstance() commandRegistry {
 			Name:        "importsim",
 			Group:       "writing",
 			Usage:       "/importsim <profile.json>",
-			Description: "导入已有仿写画像并按语料指纹合并",
+			Description: "Nhập hồ sơ mô phỏng văn phong có sẵn và gộp theo fingerprint ngữ liệu",
 			NeedsIdle:   true,
 			Run: func(m Model, args []string) (tea.Model, tea.Cmd) {
 				m.simSeq++
@@ -194,7 +194,7 @@ func commandRegistryInstance() commandRegistry {
 			Name:        "export",
 			Group:       "writing",
 			Usage:       "/export [path] [from=N] [to=M] [--overwrite]",
-			Description: "导出已完成章节为 TXT/EPUB",
+			Description: "Xuất các chương đã hoàn thành thành TXT/EPUB",
 			AutoExecute: true,
 			Run: func(m Model, args []string) (tea.Model, tea.Cmd) {
 				cmd, err := startExport(m.runtime, args)

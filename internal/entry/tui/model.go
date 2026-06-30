@@ -460,9 +460,9 @@ func (m *Model) inputHints() string {
 	}
 	if m.mode == modeNew {
 		if m.startupMode == startupModeQuick {
-			return dimStyle.Render("Tab 切换启动模式 · 输入 / 搜索命令 · Enter 直接开始创作 · Esc 清空输入" + suffix)
+			return dimStyle.Render("Tab đổi chế độ khởi động · nhập / để tìm lệnh · Enter bắt đầu viết ngay · Esc xóa ô nhập" + suffix)
 		}
-		return dimStyle.Render("Tab 切换启动模式 · 输入 / 搜索命令 · Enter 开始共创对话 · Esc 清空输入" + suffix)
+		return dimStyle.Render("Tab đổi chế độ khởi động · nhập / để tìm lệnh · Enter bắt đầu hội thoại lập kế hoạch · Esc xóa ô nhập" + suffix)
 	}
 	switch m.snapshot.RuntimeState {
 	case "pausing":
@@ -516,7 +516,7 @@ func (m *Model) outputDir() string {
 }
 
 func defaultSteerPlaceholder() string {
-	return "输入剧情干预，例如：把感情线提前到第4章"
+	return "Nhập can thiệp cốt truyện, ví dụ: đưa tuyến tình cảm lên chương 4"
 }
 
 func (m *Model) syncRuntimePlaceholder() {
@@ -525,14 +525,14 @@ func (m *Model) syncRuntimePlaceholder() {
 	}
 	switch m.snapshot.RuntimeState {
 	case "completed":
-		m.textarea.Placeholder = "创作已完成"
+		m.textarea.Placeholder = "Sáng tác đã hoàn thành"
 	case "pausing":
-		m.textarea.Placeholder = "正在暂停创作..."
+		m.textarea.Placeholder = "Đang tạm dừng sáng tác..."
 	case "paused":
-		m.textarea.Placeholder = "创作已暂停，输入任意内容继续创作"
+		m.textarea.Placeholder = "Sáng tác đã tạm dừng, nhập bất kỳ nội dung nào để tiếp tục"
 	default:
 		if !m.snapshot.IsRunning {
-			m.textarea.Placeholder = "运行中断，输入任意内容恢复创作"
+			m.textarea.Placeholder = "Phiên chạy bị gián đoạn, nhập bất kỳ nội dung nào để khôi phục"
 		} else {
 			m.textarea.Placeholder = defaultSteerPlaceholder()
 		}
@@ -568,14 +568,14 @@ func (m *Model) layoutHeights() (topH, inputH, bodyH int) {
 
 func (m Model) View() string {
 	if m.width == 0 || m.height == 0 {
-		return "加载中..."
+		return "Đang tải..."
 	}
 	if m.width < 100 {
 		return lipgloss.NewStyle().
 			Width(m.width).Height(m.height).
 			AlignHorizontal(lipgloss.Center).
 			AlignVertical(lipgloss.Center).
-			Render("终端宽度不足，请至少扩展到 100 列")
+			Render("Terminal quá hẹp, hãy mở rộng tối thiểu 100 cột")
 	}
 	if m.askState != nil {
 		return renderAskUserModal(m.width, m.height, m.askState)
