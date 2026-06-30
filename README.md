@@ -1,4 +1,6 @@
-# ainovel-cli
+﻿# ainovel-cli
+
+[Tiếng Việt: Hướng dẫn sử dụng chi tiết cho người mới bắt đầu](README.vi.md)
 
 全自动 AI 长篇小说创作引擎。Coordinator 在一次 Prompt 里驱动 Architect / Writer / Editor 三个子代理完成整本书的创作，Host 只做启动、恢复和观察。从一句话需求到完整小说，全程无需人工干预。
 
