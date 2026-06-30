@@ -71,10 +71,10 @@ func die(format string, args ...any) {
 	msg := fmt.Sprintf(format, args...)
 	fmt.Fprintln(os.Stderr, msg)
 	if path := bootstrap.WriteStartupError(msg); path != "" {
-		fmt.Fprintf(os.Stderr, "（详细错误已记录到 %s）\n", path)
+		fmt.Fprintf(os.Stderr, "(Chi tiết lỗi đã được ghi vào %s)\n", path)
 	}
 	if !headlessMode && stdinIsTerminal() {
-		fmt.Fprint(os.Stderr, "\n按回车键退出...")
+		fmt.Fprint(os.Stderr, "\nNhấn Enter để thoát...")
 		fmt.Fscanln(os.Stdin)
 	}
 	os.Exit(1)
@@ -210,11 +210,11 @@ func runSelfUpdate(target string) error {
 		return err
 	}
 	if !result.Updated {
-		fmt.Printf("ainovel-cli 已是最新版本 %s\n", result.Version)
+		fmt.Printf("ainovel-cli đã là phiên bản mới nhất %s\n", result.Version)
 		return nil
 	}
-	fmt.Printf("ainovel-cli 已更新到 %s\n", result.Version)
-	fmt.Printf("安装位置：%s\n", result.Path)
+	fmt.Printf("ainovel-cli đã cập nhật lên %s\n", result.Version)
+	fmt.Printf("Vị trí cài đặt: %s\n", result.Path)
 	return nil
 }
 

@@ -63,7 +63,7 @@ func Run(cfg bootstrap.Config, bundle assets.Bundle, opts Options) error {
 		if err != nil {
 			return err
 		}
-		fmt.Fprintf(stderr, "headless 启动: %s\n", eng.Dir())
+		fmt.Fprintf(stderr, "Khởi động headless: %s\n", eng.Dir())
 		if err := eng.StartPrepared(plan.StartPrompt); err != nil {
 			return err
 		}
@@ -81,9 +81,9 @@ func Run(cfg bootstrap.Config, bundle assets.Bundle, opts Options) error {
 			return err
 		}
 		if label == "" {
-			return fmt.Errorf("headless 模式需要 --prompt，或输出目录 %q 下已有可恢复会话", eng.Dir())
+			return fmt.Errorf("Chế độ headless cần --prompt, hoặc thư mục xuất %q phải có phiên có thể khôi phục", eng.Dir())
 		}
-		fmt.Fprintf(stderr, "headless 恢复: %s (%s)\n", eng.Dir(), label)
+		fmt.Fprintf(stderr, "Khôi phục headless: %s (%s)\n", eng.Dir(), label)
 		return consume(eng, stdout, stderr, roundHasContent)
 	}
 

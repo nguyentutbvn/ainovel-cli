@@ -63,8 +63,8 @@ func RunSetup() (Config, error) {
 	fmt.Fprintln(os.Stderr)
 	fmt.Fprintln(os.Stderr, lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("99")).
 		Render("Không phát hiện file cấu hình, bắt đầu thiết lập..."))
-	fmt.Fprintf(os.Stderr, "  配置文件路径：%s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("245")).Render(DefaultConfigPath()))
-	fmt.Fprintf(os.Stderr, "  完成后可随时编辑该文件调整高级设置。\n")
+	fmt.Fprintf(os.Stderr, "  Đường dẫn tệp cấu hình: %s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("245")).Render(DefaultConfigPath()))
+	fmt.Fprintf(os.Stderr, "  Sau khi hoàn tất, có thể chỉnh tệp này bất cứ lúc nào để điều chỉnh thiết lập nâng cao.\n")
 	fmt.Fprintln(os.Stderr)
 
 	// Step 1: 选择 Provider
@@ -102,7 +102,7 @@ func RunSetup() (Config, error) {
 	}
 	pc.APIKey = apiKey
 	if apiKey == "" {
-		printStepDone("API Key", "未设置")
+		printStepDone("API Key", "Chưa đặt")
 	} else {
 		printStepDone("API Key", maskKey(apiKey))
 	}
@@ -121,7 +121,7 @@ func RunSetup() (Config, error) {
 	if baseURL != "" {
 		printStepDone("Base URL", baseURL)
 	} else {
-		printStepDone("Base URL", "默认")
+		printStepDone("Base URL", "Mặc định")
 	}
 
 	// Step 4: 模型名（必填）
@@ -152,12 +152,12 @@ func RunSetup() (Config, error) {
 	rulesDir := rules.DefaultHomeRulesDir()
 
 	fmt.Fprintln(os.Stderr)
-	fmt.Fprintf(os.Stderr, "%s 配置已保存到 %s\n",
+	fmt.Fprintf(os.Stderr, "%s Cấu hình đã được lưu vào %s\n",
 		lipgloss.NewStyle().Foreground(lipgloss.Color("42")).Render("✓"), path)
-	fmt.Fprintf(os.Stderr, "  默认模型：%s\n", modelName)
-	fmt.Fprintln(os.Stderr, "  如需按角色配置不同模型，编辑配置文件即可。")
+	fmt.Fprintf(os.Stderr, "  Model mặc định: %s\n", modelName)
+	fmt.Fprintln(os.Stderr, "  Nếu cần cấu hình model khác nhau theo vai trò, chỉ cần chỉnh tệp cấu hình.")
 	if rulesDir != "" {
-		fmt.Fprintf(os.Stderr, "  全局写作偏好可放 %s 下的 .md 文件（见其中 README.txt）\n", rulesDir)
+		fmt.Fprintf(os.Stderr, "  Có thể đặt tùy chọn viết toàn cục trong các tệp .md dưới %s (xem README.txt trong đó)\n", rulesDir)
 	}
 	fmt.Fprintln(os.Stderr)
 
@@ -316,7 +316,7 @@ func (m setupSelectModel) View() string {
 		}
 		b.WriteString(cursor + label + "\n")
 	}
-	b.WriteString(setupDimStyle.Render("\n  ↑↓ 选择  Enter 确认  Esc 取消"))
+	b.WriteString(setupDimStyle.Render("\n  ↑↓ chọn  Enter xác nhận  Esc hủy"))
 	return b.String()
 }
 
@@ -371,7 +371,7 @@ func (m setupInputModel) View() string {
 		b.WriteString(m.value)
 		b.WriteString(setupCursorStyle.Render("▌"))
 	}
-	b.WriteString(setupDimStyle.Render("  (Enter 确认, Esc 取消)"))
+	b.WriteString(setupDimStyle.Render("  (Enter xác nhận, Esc hủy)"))
 	b.WriteString("\n")
 	return b.String()
 }

@@ -56,7 +56,7 @@ func renderHelpText(width int) string {
 		"↑↓ chọn lệnh gợi ý",
 		"Tab/Enter nhận gợi ý",
 		"Esc đóng bảng lệnh hiện tại",
-		"Ctrl+R 切换选中复制模式（关闭鼠标上报后可拖拽选中复制，再按一次恢复）",
+		"Ctrl+R chuyển chế độ bôi chọn để sao chép (tắt báo cáo chuột để kéo chọn; nhấn lần nữa để khôi phục)",
 	} {
 		b.WriteString(hintStyle.Render(line))
 		b.WriteString("\n")
@@ -83,7 +83,7 @@ func renderHelpModal(width, height int, state *helpState) string {
 		boxW,
 		boxH,
 		"Trợ giúp lệnh",
-		"  ↑↓ 滚动 · Esc 关闭",
+		"  ↑↓ cuộn · Esc đóng",
 		strings.Split(state.viewport.View(), "\n"),
 	)
 	return lipgloss.Place(width, height, lipgloss.Center, lipgloss.Center, modal)
